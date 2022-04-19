@@ -6,8 +6,12 @@ parser = argparse.ArgumentParser(description="Quizlet CLI")
 subparsers = parser.add_subparsers(dest="command", help="Commands")
 
 study_parser = subparsers.add_parser("study")
+
 sets_parser = subparsers.add_parser("sets")
 sets_parser.add_argument("subcommand", type=str, choices=["create", "list"])
+
+set_parser = subparsers.add_parser("add")
+set_parser.add_argument("set_name", type=str)
 
 args = parser.parse_args()
 
@@ -21,5 +25,7 @@ elif args.command == "sets":
         sets.create() 
     elif args.subcommand == "list":
         sets.list()
+elif args.command == "add":
+    sets.add(args.set_name)
 else:
     parser.print_help()

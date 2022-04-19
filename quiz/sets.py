@@ -14,9 +14,12 @@ def create():
     save(new_set)
     print(style("Set successfully created", color="green"))
 
+
 def save(s):
+    """ Save a set to disk """
     SET_PATH = f"{BASE_PATH}/{s.title}"
-    os.makedirs(SET_PATH)
+    if not os.path.exists(SET_PATH):
+        os.makedirs(SET_PATH)
     with open(f"{SET_PATH}/info.json", "w") as info_file:
         info = { "title": s.title, "description": s.description }
         info = json.dump(info, info_file)
@@ -25,17 +28,18 @@ def save(s):
             terms_file.writelines(f"{card.term}\n")
             terms_file.writelines(f"{card.definition}\n")
 
+
 def load(title):
-    """ Loads an exisiting set """
+    """ Loads an exisiting set from disk """
     if os.path.exists(f"{BASE_PATH}/{title}"):
-        title, description = None, None
+        set_title, set_description = None, None
         cards = []
 
         # Populate title and description
         with open(f"{BASE_PATH}/{title}/info.json", "r") as info_file:
             info = json.load(info_file)
-            title = info["title"]
-            description = info["description"]
+            set_title = info["title"]
+            set_description = info["description"]
 
         # Populate cards
         with open(f"{BASE_PATH}/{title}/terms.txt", "r") as file:
@@ -45,12 +49,13 @@ def load(title):
                 card = Card(term, definition)
                 cards.append(card)
 
-        return Set(title, description, cards)
+        return Set(set_title, set_description, cards)
     else:
         raise FileNotFoundError(f"Set `{title}`not found")
 
 
 def list():
+    """ Lists all sets saved in disk """
     size = os.get_terminal_size()
     terminal_width = min(size.columns, 120)
 
@@ -66,6 +71,24 @@ def list():
             title_str = f"{title: <{title_width}}"
             description_str = f"{description: <{description_width}}"
             print(f"{title_str}{description_str}")
+
+
+def add(name):
+    """ Prompts user to add cards to set """
+    s = load(name)
+    try:
+        while True:
+            print(style("Adding new card ([C-c] to exit)", color="header"))
+            term = input(style("Term: ", color="bold"))
+            definition = input(style("Definition: ", color="bold"))
+            new_card = Card(term, definition)
+            s.add(new_card)
+            save(s)
+            print(style("Card added", color="green"))
+            print()
+    except KeyboardInterrupt:
+        print(style("\n\nEXITED", color="bold"))
+        pass
 
 
 class Set:
