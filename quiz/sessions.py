@@ -1,8 +1,9 @@
 from utils import style, sample, bcolors
 import random
 
+
 class Session:
-    def __init__(self, deck, mode = "study"):
+    def __init__(self, deck, mode="study"):
         self._deck = deck
         self._mode = mode
 
@@ -29,13 +30,13 @@ class Session:
             print()
 
             num_choices = 4
-            choices = list(map(
-                lambda x: x.definition, 
-                sample(num_choices - 1, self._deck)))
+            choices = list(
+                map(lambda x: x.definition, sample(num_choices - 1, self._deck))
+            )
             while card.definition in choices:
-                choices = list(map(
-                    lambda x: x.definition, 
-                    sample(num_choices - 1, self._deck)))
+                choices = list(
+                    map(lambda x: x.definition, sample(num_choices - 1, self._deck))
+                )
             choices.append(card.definition)
             random.shuffle(choices)
 
@@ -48,6 +49,3 @@ class Session:
             else:
                 print(f"{bcolors.FAIL}Incorrect{bcolors.ENDC}")
             print()
-            
-
-

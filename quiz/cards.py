@@ -1,4 +1,3 @@
-
 class Card:
     def __init__(self, term, definition):
         self._term = term
@@ -11,7 +10,7 @@ class Card:
     @term.setter
     def term(self, new_term):
         self._term = new_term
-        
+
     @property
     def definition(self):
         return self._definition

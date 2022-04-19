@@ -6,8 +6,9 @@ from utils import style
 """ Where all quiz files are stored """
 BASE_PATH = "quizlet"
 
+
 def create():
-    """ Prompts user to create a new set """
+    """Prompts user to create a new set"""
     title = input(style("Title: ", color="bold"))
     description = input(style("Description (optional): ", color="bold"))
     new_set = Set(title, description)
@@ -16,12 +17,12 @@ def create():
 
 
 def save(s):
-    """ Save a set to disk """
+    """Save a set to disk"""
     SET_PATH = f"{BASE_PATH}/{s.title}"
     if not os.path.exists(SET_PATH):
         os.makedirs(SET_PATH)
     with open(f"{SET_PATH}/info.json", "w") as info_file:
-        info = { "title": s.title, "description": s.description }
+        info = {"title": s.title, "description": s.description}
         info = json.dump(info, info_file)
     with open(f"{SET_PATH}/terms.txt", "w") as terms_file:
         for card in s:
@@ -30,7 +31,7 @@ def save(s):
 
 
 def load(title):
-    """ Loads an exisiting set from disk """
+    """Loads an exisiting set from disk"""
     if os.path.exists(f"{BASE_PATH}/{title}"):
         set_title, set_description = None, None
         cards = []
@@ -55,7 +56,7 @@ def load(title):
 
 
 def list():
-    """ Lists all cards saved in disk """
+    """Lists all cards saved in disk"""
     size = os.get_terminal_size()
     terminal_width = min(size.columns, 120)
 
@@ -74,7 +75,7 @@ def list():
 
 
 def add(name):
-    """ Prompts user to add cards to set """
+    """Prompts user to add cards to set"""
     s = load(name)
     try:
         while True:
@@ -92,7 +93,7 @@ def add(name):
 
 
 class Set:
-    def __init__(self, title, description, cards = []):
+    def __init__(self, title, description, cards=[]):
         self._title = title
         self._description = description
         self._cards = cards
@@ -122,7 +123,7 @@ class Set:
     @title.setter
     def title(self, new_title):
         self._title = new_title
-    
+
     @property
     def description(self):
         return self._description
@@ -155,4 +156,3 @@ class Set:
             term_str = f"{term: <{term_width}}"
             definition_str = f"{definition: <{definition_width}}"
             print(f"{term_str}{definition_str}")
-        

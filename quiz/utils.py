@@ -14,8 +14,8 @@ class bcolors:
     UNDERLINE = "\033[4m"
 
 
-def style(text, color = None):
-    """ Style text for terminal output """
+def style(text, color=None):
+    """Style text for terminal output"""
 
     if color == "header":
         return f"{bcolors.HEADER}{text}{bcolors.ENDC}"
@@ -35,5 +35,3 @@ def sample(n: int, array: List[Any]) -> List[Any]:
     array_ = [*array]
     random.shuffle(array_)
     return [*array_[0:n]]
-
-
