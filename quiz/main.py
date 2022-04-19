@@ -1,5 +1,6 @@
 import typer
 import sets
+import cards
 from sessions import Session
 
 app = typer.Typer()
@@ -38,12 +39,12 @@ def sets_create():
 
 @set_app.command("add")
 def set_add(set_title: str):
-    sets.add(set_title)
+    cards.add(set_title)
 
 
 @set_app.command("delete")
 def set_delete(set_title: str, card_id: int):
-    sets.delete(set_title, card_id)
+    cards.delete(set_title, card_id)
 
 
 @set_app.command("list")
