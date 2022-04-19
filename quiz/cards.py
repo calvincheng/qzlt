@@ -1,4 +1,4 @@
-from utils import style
+import typer
 import sets
 
 
@@ -6,14 +6,14 @@ def add(set_title):
     """Prompts user to add cards to set"""
     s = sets.load(set_title)
     while True:
-        print(style("Adding new card (press ctrl+c to exit)", color="header"))
-        term = input(style("Term: ", color="bold"))
-        definition = input(style("Definition: ", color="bold"))
+        typer.secho("Adding new card (press ctrl+c to exit)", fg="magenta")
+        term = typer.prompt(typer.style("Term", fg="bright_black"))
+        definition = typer.prompt(typer.style("Definition", fg="bright_black"))
         new_card = Card(term, definition)
         s.add(new_card)
         sets.save(s)
-        print(style("Card added", color="green"))
-        print()
+        typer.secho("Card added", fg="green")
+        typer.echo()
 
 
 def delete(set_title, idx):
@@ -22,14 +22,14 @@ def delete(set_title, idx):
     if idx < len(s):
         s.delete(idx)
         sets.save(s)
-        print(f"Deleted card {idx}")
+        typer.echo(f"Deleted card {idx}")
     else:
         reason = None
         if idx < 0:
             reason = "cannot be less than 0"
         elif idx >= len(s):
             reason = "greater than set size"
-        print(style(f"Invalid index: {idx} ({reason})", color="fail"))
+        typer.secho(f"Invalid index: {idx} ({reason})", fg="red", err=True)
 
 
 class Card:

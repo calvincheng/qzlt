@@ -1,7 +1,7 @@
 import os
 import json
+import typer
 from cards import Card
-from utils import style
 
 """ Where all quiz files are stored """
 BASE_PATH = "quizlet"
@@ -9,11 +9,11 @@ BASE_PATH = "quizlet"
 
 def create():
     """Prompts user to create a new set"""
-    title = input(style("Title: ", color="bold"))
-    description = input(style("Description (optional): ", color="bold"))
+    title = typer.prompt(typer.style("Title", fg="bright_black"))
+    description = typer.prompt(typer.style("Description", fg="bright_black"))
     new_set = Set(title, description)
     save(new_set)
-    print(style("Set successfully created", color="green"))
+    typer.secho("Set successfully created", fg="green")
 
 
 def save(s):
@@ -63,7 +63,7 @@ def list():
     title_width = terminal_width // 4
     description_width = terminal_width // 4 * 3
 
-    print(f"{'TITLE': <{title_width}}{'DESCRIPTION': <{description_width}}")
+    typer.echo(f"{'TITLE': <{title_width}}{'DESCRIPTION': <{description_width}}")
 
     for title in os.listdir(f"{BASE_PATH}"):
         with open(f"{BASE_PATH}/{title}/info.json", "r") as info_file:
@@ -71,7 +71,7 @@ def list():
             title, description = info["title"], info["description"]
             title_str = f"{title: <{title_width}}"
             description_str = f"{description: <{description_width}}"
-            print(f"{title_str}{description_str}")
+            typer.echo(f"{title_str}{description_str}")
 
 
 class Set:
@@ -124,11 +124,11 @@ class Set:
         title_idx_str = f"{'ID': <{idx_width}}"
         title_term_str = f"{'TERM': <{term_width}}"
         title_definition_str = f"{'DEFINITION': <{definition_width}}"
-        print(f"{title_idx_str}{title_term_str}{title_definition_str}")
+        typer.echo(f"{title_idx_str}{title_term_str}{title_definition_str}")
 
         for i, card in enumerate(self._cards):
             term, definition = card.term, card.definition
             idx_str = f"{i: <{idx_width}}"
             term_str = f"{term: <{term_width}}"
             definition_str = f"{definition: <{definition_width}}"
-            print(f"{idx_str}{term_str}{definition_str}")
+            typer.echo(f"{idx_str}{term_str}{definition_str}")

@@ -1,5 +1,6 @@
-from utils import style, sample, bcolors
+from utils import sample
 import random
+import typer
 
 
 class Session:
@@ -9,19 +10,19 @@ class Session:
 
     def write(self):
         for i, card in enumerate(self._deck.cards):
-            print(style(f"Card {i+1}/{len(self._deck)}", color="header"))
-            print(card.term)
-            answer = input(style("Answer: ", color="bold"))
+            typer.secho(f"Card {i+1}/{len(self._deck)}", fg="magenta")
+            typer.secho(card.term, fg="bright_white", bold=True)
+            answer = typer.prompt(typer.style("Answer", fg="bright_black"))
             if answer == card.definition:
-                print(style("Correct!", color="green"))
+                typer.secho("Correct!", fg="green")
             else:
-                print(style("Incorrect", color="fail"))
-            print()
+                typer.secho("Incorrect", fg="red")
+            typer.echo()
 
     def learn(self):
         for i, card in enumerate(self._deck.cards):
-            print(style(f"Card {i+1}/{len(self._deck)}", color="header"))
-            print(style(card.term, color="bold"))
+            typer.secho(f"Card {i+1}/{len(self._deck)}", fg="magenta")
+            typer.secho(card.term, fg="bright_white", bold=True)
 
             num_choices = 4
             choices = list(
@@ -38,11 +39,11 @@ class Session:
             random.shuffle(choices)
 
             for i, choice in enumerate(choices):
-                print(f"{i + 1}. {choice}")
+                typer.echo(f"{i + 1}. {choice}")
 
-            answer = input(f"{bcolors.BOLD}Select the correct term: {bcolors.ENDC}")
+            answer = typer.prompt(typer.style("Select the correct term", bold=True))
             if choices[int(answer) - 1] == card.definition:
-                print(f"{bcolors.OKGREEN}Correct!{bcolors.ENDC}")
+                typer.secho("Correct!", fg="green")
             else:
-                print(f"{bcolors.FAIL}Incorrect{bcolors.ENDC}")
-            print()
+                typer.secho("Incorrect", fg="red")
+            typer.echo()
