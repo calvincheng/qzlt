@@ -23,7 +23,9 @@ def study(set_title: str, study_mode: str = "write"):
 
 
 @sets_app.callback(invoke_without_command=True)
-def sets_default():
+def sets_default(ctx: typer.Context):
+    if ctx.invoked_subcommand is not None:
+        return
     sets.list()
 
 
