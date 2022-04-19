@@ -8,19 +8,15 @@ class Session:
         self._mode = mode
 
     def write(self):
-        try:
-            for i, card in enumerate(self._deck.cards):
-                print(style(f"Card {i+1}/{len(self._deck)}", color="header"))
-                print(card.term)
-                answer = input(style("Answer: ", color="bold"))
-                if answer == card.definition:
-                    print(style("Correct!", color="green"))
-                else:
-                    print(style("Incorrect", color="fail"))
-                print()
-        except KeyboardInterrupt:
-            print(style("\n\nEXITED", color="bold"))
-            pass
+        for i, card in enumerate(self._deck.cards):
+            print(style(f"Card {i+1}/{len(self._deck)}", color="header"))
+            print(card.term)
+            answer = input(style("Answer: ", color="bold"))
+            if answer == card.definition:
+                print(style("Correct!", color="green"))
+            else:
+                print(style("Incorrect", color="fail"))
+            print()
 
     def learn(self):
         for i, card in enumerate(self._deck.cards):

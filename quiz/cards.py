@@ -5,19 +5,15 @@ import sets
 def add(set_title):
     """Prompts user to add cards to set"""
     s = sets.load(set_title)
-    try:
-        while True:
-            print(style("Adding new card (press ctrl+c to exit)", color="header"))
-            term = input(style("Term: ", color="bold"))
-            definition = input(style("Definition: ", color="bold"))
-            new_card = Card(term, definition)
-            s.add(new_card)
-            sets.save(s)
-            print(style("Card added", color="green"))
-            print()
-    except KeyboardInterrupt:
-        print(style("\n\nEXITED", color="bold"))
-        pass
+    while True:
+        print(style("Adding new card (press ctrl+c to exit)", color="header"))
+        term = input(style("Term: ", color="bold"))
+        definition = input(style("Definition: ", color="bold"))
+        new_card = Card(term, definition)
+        s.add(new_card)
+        sets.save(s)
+        print(style("Card added", color="green"))
+        print()
 
 
 def delete(set_title, idx):
