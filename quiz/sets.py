@@ -4,7 +4,7 @@ import typer
 from cards import Card
 
 """ Where all quiz files are stored """
-BASE_PATH = "quizlet"
+BASE_PATH = "sets"
 
 
 def create():
