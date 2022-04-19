@@ -92,6 +92,20 @@ def add(name):
         pass
 
 
+def delete(name, idx):
+    """Prompts user to delete a card from a set"""
+    s = load(name)
+    if (idx < len(s)):
+        s.delete(idx)
+        save(s)
+        print(f"Deleted card {idx}")
+    else:
+        reason = None
+        if idx < 0: reason = "cannot be less than 0"
+        elif idx >= len(s): reason = "greater than set size"
+        print(style(f"Invalid index: {idx} ({reason})", color="fail"))
+
+
 class Set:
     def __init__(self, title, description, cards=[]):
         self._title = title
@@ -130,6 +144,9 @@ class Set:
 
     def add(self, card):
         self._cards.append(card)
+
+    def delete(self, idx):
+        self._cards.pop(idx)
 
     def list(self):
         idx_width = 6

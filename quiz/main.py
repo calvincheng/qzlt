@@ -41,6 +41,11 @@ def set_add(set_title: str):
     sets.add(set_title)
 
 
+@set_app.command("delete")
+def set_delete(set_title: str, card_id: int):
+    sets.delete(set_title, card_id)
+
+
 @set_app.command("list")
 def set_list(set_title: str):
     deck = sets.load(set_title)
