@@ -21,14 +21,19 @@ def study(set_title: str, study_mode: str = "write"):
         session.learn()
 
 
-@sets_app.command("create")
-def sets_create():
-    sets.create()
+@sets_app.callback(invoke_without_command=True)
+def sets_default():
+    sets.list()
 
 
 @sets_app.command("list")
 def sets_list():
     sets.list()
+
+
+@sets_app.command("create")
+def sets_create():
+    sets.create()
 
 
 @set_app.command("add")
