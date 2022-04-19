@@ -14,7 +14,7 @@ class bcolors:
     UNDERLINE = "\033[4m"
 
 
-def style(text, color):
+def style(text, color = None):
     """ Style text for terminal output """
 
     if color == "header":
