@@ -55,7 +55,7 @@ def load(title):
 
 
 def list():
-    """ Lists all sets saved in disk """
+    """ Lists all cards saved in disk """
     size = os.get_terminal_size()
     terminal_width = min(size.columns, 120)
 
@@ -78,7 +78,7 @@ def add(name):
     s = load(name)
     try:
         while True:
-            print(style("Adding new card ([C-c] to exit)", color="header"))
+            print(style("Adding new card (press ctrl+c to exit)", color="header"))
             term = input(style("Term: ", color="bold"))
             definition = input(style("Definition: ", color="bold"))
             new_card = Card(term, definition)
@@ -141,3 +141,4 @@ class Set:
 
     def add(self, card):
         self._cards.append(card)
+        

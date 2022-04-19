@@ -1,32 +1,35 @@
-import argparse
+import typer
 import sets
 from sessions import Session
 
-parser = argparse.ArgumentParser(description="Quizlet CLI")
-subparsers = parser.add_subparsers(dest="command", help="Commands")
+app = typer.Typer()
 
-study_parser = subparsers.add_parser("study")
-study_parser.add_argument("set_name", type=str)
+sets_app = typer.Typer()
+app.add_typer(sets_app, name="sets")
 
-sets_parser = subparsers.add_parser("sets")
-sets_parser.add_argument("subcommand", type=str, choices=["create", "list"])
+set_app = typer.Typer()
+app.add_typer(set_app, name="set")
 
-set_parser = subparsers.add_parser("add")
-set_parser.add_argument("set_name", type=str)
-
-args = parser.parse_args()
-
-
-if args.command == "study":
-    deck = sets.load(args.set_name)
+@app.command()
+def study(set_title: str, study_mode: str = "write"):
+    deck = sets.load(set_title)
     session = Session(deck)
-    session.write()
-elif args.command == "sets":
-    if args.subcommand == "create":
-        sets.create() 
-    elif args.subcommand == "list":
-        sets.list()
-elif args.command == "add":
-    sets.add(args.set_name)
-else:
-    parser.print_help()
+    if study_mode == "write":
+        session.write()
+    elif study_mode == "learn":
+        session.learn()
+
+@sets_app.command("create")
+def sets_create():
+    sets.create() 
+
+@sets_app.command("list")
+def sets_list():
+    sets.list() 
+
+@set_app.command("add")
+def set_add(set_title: str):
+    sets.add(set_title)
+
+if __name__ == "__main__":
+    app()
