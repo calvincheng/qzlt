@@ -9,7 +9,7 @@ class Session:
 
     def write(self):
         try:
-            for i, card in enumerate(self._deck):
+            for i, card in enumerate(self._deck.cards):
                 print(style(f"Card {i+1}/{len(self._deck)}", color="header"))
                 print(card.term)
                 answer = input(style("Answer: ", color="bold"))
@@ -23,25 +23,26 @@ class Session:
             pass
 
     def learn(self):
-        print(len(self._deck))
-        for i, card in enumerate(self._deck):
+        for i, card in enumerate(self._deck.cards):
             print(style(f"Card {i+1}/{len(self._deck)}", color="header"))
-            print(card.term)
-            print()
+            print(style(card.term, color="bold"))
 
             num_choices = 4
             choices = list(
-                map(lambda x: x.definition, sample(num_choices - 1, self._deck))
+                map(lambda x: x.definition, sample(num_choices - 1, self._deck.cards))
             )
             while card.definition in choices:
                 choices = list(
-                    map(lambda x: x.definition, sample(num_choices - 1, self._deck))
+                    map(
+                        lambda x: x.definition,
+                        sample(num_choices - 1, self._deck.cards),
+                    )
                 )
             choices.append(card.definition)
             random.shuffle(choices)
 
             for i, choice in enumerate(choices):
-                print(f"{i + 1} - {choice}")
+                print(f"{i + 1}. {choice}")
 
             answer = input(f"{bcolors.BOLD}Select the correct term: {bcolors.ENDC}")
             if choices[int(answer) - 1] == card.definition:

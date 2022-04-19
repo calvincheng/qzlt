@@ -104,18 +104,6 @@ class Set:
     def __getitem__(self, n):
         return self._cards[n]
 
-    def __iter__(self):
-        self.n = 0
-        return self
-
-    def __next__(self):
-        if self.n < len(self):
-            result = self._cards[self.n]
-            self.n += 1
-            return result
-        else:
-            raise StopIteration
-
     @property
     def title(self):
         return self._title
