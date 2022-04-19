@@ -1,0 +1,26 @@
+hello
+bonjour
+goodbye
+au revoir
+cat
+chat
+dog
+chien
+big
+grand
+small
+petit
+book
+livre
+earphones
+écouteurs
+phone
+portable
+happy
+heureux
+sad
+triste
+alcohol
+alcool
+food
+nourriture
