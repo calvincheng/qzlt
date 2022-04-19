@@ -1,6 +1,6 @@
 bin/
 include/
 lib/
-pyvenv.cfg/
+pyvenv.cfg
 *.swp
 sets/
