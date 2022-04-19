@@ -31,5 +31,10 @@ def sets_list():
 def set_add(set_title: str):
     sets.add(set_title)
 
+@set_app.command("list")
+def set_list(set_title: str):
+    deck = sets.load(set_title)
+    deck.list()
+
 if __name__ == "__main__":
     app()

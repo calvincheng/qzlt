@@ -141,4 +141,18 @@ class Set:
 
     def add(self, card):
         self._cards.append(card)
+
+    def list(self):
+        size = os.get_terminal_size()
+        terminal_width = min(size.columns, 120)
+
+        term_width = terminal_width // 4
+        definition_width = terminal_width // 4 * 3
+
+        print(f"{'TERM': <{term_width}}{'DEFINITION': <{definition_width}}")
+        for card in self._cards:
+            term, definition = card.term, card.definition
+            term_str = f"{term: <{term_width}}"
+            definition_str = f"{definition: <{definition_width}}"
+            print(f"{term_str}{definition_str}")
         
