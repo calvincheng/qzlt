@@ -32,27 +32,27 @@ def save(s):
 
 def load(title):
     """Loads an exisiting set from disk"""
-    if os.path.exists(f"{BASE_PATH}/{title}"):
-        set_title, set_description = None, None
-        cards = []
+    if not os.path.exists(f"{BASE_PATH}/{title}"):
+        return None
 
-        # Populate title and description
-        with open(f"{BASE_PATH}/{title}/info.json", "r") as info_file:
-            info = json.load(info_file)
-            set_title = info["title"]
-            set_description = info["description"]
+    set_title, set_description = None, None
+    cards = []
 
-        # Populate cards
-        with open(f"{BASE_PATH}/{title}/terms.txt", "r") as file:
-            lines = file.read().splitlines()
-            for i in range(len(lines) // 2):
-                term, definition = lines[2 * i], lines[2 * i + 1]
-                card = Card(term, definition)
-                cards.append(card)
+    # Populate title and description
+    with open(f"{BASE_PATH}/{title}/info.json", "r") as info_file:
+        info = json.load(info_file)
+        set_title = info["title"]
+        set_description = info["description"]
 
-        return Set(set_title, set_description, cards)
-    else:
-        raise FileNotFoundError(f"Set `{title}`not found")
+    # Populate cards
+    with open(f"{BASE_PATH}/{title}/terms.txt", "r") as file:
+        lines = file.read().splitlines()
+        for i in range(len(lines) // 2):
+            term, definition = lines[2 * i], lines[2 * i + 1]
+            card = Card(term, definition)
+            cards.append(card)
+
+    return Set(set_title, set_description, cards)
 
 
 def list():

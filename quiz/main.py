@@ -19,6 +19,10 @@ def study(
     shuffle: bool = False,
 ):
     deck = sets.load(set_title)
+    if deck is None:
+        typer.secho(f"Could not find deck titled `{set_title}`", fg="red")
+        return
+
     session = Session(deck, shuffle)
     if mode == "write":
         session.write()
@@ -56,6 +60,9 @@ def set_delete(set_title: str, card_id: int):
 @set_app.command("list")
 def set_list(set_title: str):
     deck = sets.load(set_title)
+    if deck is None:
+        typer.secho(f"Could not find deck titled `{set_title}`", fg="red")
+        return
     deck.list()
 
 
