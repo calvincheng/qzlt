@@ -1,7 +1,6 @@
 import random
 from typing import List, Any
 
-
 def sample(n: int, array: List[Any]) -> List[Any]:
     array_ = [*array]
     random.shuffle(array_)

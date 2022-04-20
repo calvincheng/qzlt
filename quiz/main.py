@@ -13,20 +13,16 @@ app.add_typer(set_app, name="set")
 
 
 @app.command()
-def study(
-    set_title: str = typer.Option(None, prompt=typer.style("Set title", bold=True)),
-    mode: str = "write",
-    shuffle: bool = False,
-):
+def study(set_title: str, study_mode: str = "write", shuffle: bool = False):
     deck = sets.load(set_title)
     if deck is None:
         typer.secho(f"Could not find deck titled `{set_title}`", fg="red")
         return
 
     session = Session(deck, shuffle)
-    if mode == "write":
+    if study_mode == "write":
         session.write()
-    elif mode == "learn":
+    elif study_mode == "learn":
         session.learn()
 
 
