@@ -4,9 +4,10 @@ import typer
 
 
 class Session:
-    def __init__(self, deck, mode="study"):
+    def __init__(self, deck, shuffle=False):
         self._deck = deck
-        self._mode = mode
+        if shuffle:
+            random.shuffle(self._deck.cards)
 
     def write(self):
         for i, card in enumerate(self._deck.cards):
@@ -17,7 +18,9 @@ class Session:
                 typer.secho("Correct!", fg="green")
             else:
                 typer.secho(f"Incorrect", fg="red")
-                typer.secho(f"The correct answer was '{card.definition}'", fg="bright_black")
+                typer.secho(
+                    f"The correct answer was '{card.definition}'", fg="bright_black"
+                )
             typer.echo()
 
     def learn(self):
@@ -47,5 +50,7 @@ class Session:
                 typer.secho("Correct!", fg="green")
             else:
                 typer.secho("Incorrect", fg="red")
-                typer.secho(f"The correct answer was '{card.definition}'", fg="bright_black")
+                typer.secho(
+                    f"The correct answer was '{card.definition}'", fg="bright_black"
+                )
             typer.echo()
