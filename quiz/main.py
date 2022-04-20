@@ -13,12 +13,16 @@ app.add_typer(set_app, name="set")
 
 
 @app.command()
-def study(set_title: str, study_mode: str = "write", shuffle: bool = False):
+def study(
+    set_title: str = typer.Option(None, prompt=typer.style("Set title", bold=True)),
+    mode: str = "write",
+    shuffle: bool = False,
+):
     deck = sets.load(set_title)
     session = Session(deck, shuffle)
-    if study_mode == "write":
+    if mode == "write":
         session.write()
-    elif study_mode == "learn":
+    elif mode == "learn":
         session.learn()
 
 
