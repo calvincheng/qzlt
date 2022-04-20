@@ -1,7 +1,7 @@
 import typer
-import sets
-import cards
-from sessions import Session
+from qzlt import sets
+from qzlt import cards
+from qzlt.sessions import Session
 
 app = typer.Typer()
 

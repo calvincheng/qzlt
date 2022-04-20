@@ -4,3 +4,4 @@ lib/
 pyvenv.cfg
 *.swp
 sets/
+__pycache__/

@@ -1,4 +1,4 @@
-from utils import sample
+from qzlt.utils import sample
 import random
 import typer
 

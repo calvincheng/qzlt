@@ -1,5 +1,5 @@
 import typer
-import sets
+from qzlt import sets
 
 
 def add(set_title):

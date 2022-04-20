@@ -1,7 +1,7 @@
 import os
 import json
 import typer
-from cards import Card
+from qzlt.cards import Card
 
 """ Where all quiz files are stored """
 BASE_PATH = "sets"
