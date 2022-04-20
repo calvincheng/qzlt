@@ -16,7 +16,8 @@ class Session:
             if answer == card.definition:
                 typer.secho("Correct!", fg="green")
             else:
-                typer.secho("Incorrect", fg="red")
+                typer.secho(f"Incorrect", fg="red")
+                typer.secho(f"The correct answer was '{card.definition}'", fg="bright_black")
             typer.echo()
 
     def learn(self):
@@ -46,4 +47,5 @@ class Session:
                 typer.secho("Correct!", fg="green")
             else:
                 typer.secho("Incorrect", fg="red")
+                typer.secho(f"The correct answer was '{card.definition}'", fg="bright_black")
             typer.echo()
