@@ -28,7 +28,7 @@ class Session:
 
     def write(self):
         """Begins a writing session"""
-        for i, card in enumerate(self._deck.cards):
+        for i, card in enumerate(self._deck):
             typer.secho(f"Card {i+1}/{len(self._deck)}", fg="magenta")
             typer.secho(card.term, fg="bright_white", bold=True)
             answer = typer.prompt(typer.style("Answer", fg="bright_black"))
@@ -46,7 +46,7 @@ class Session:
 
     def learn(self):
         """Begins a learning session"""
-        for i, card in enumerate(self._deck.cards):
+        for i, card in enumerate(self._deck):
             typer.secho(f"Card {i+1}/{len(self._deck)}", fg="magenta")
             typer.secho(card.term, fg="bright_white", bold=True)
 

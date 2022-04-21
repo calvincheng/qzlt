@@ -107,6 +107,10 @@ class Set:
         """
         return len(self._cards)
 
+    def __iter__(self):
+        """Implements built-in iterator"""
+        return iter(self._cards)
+
     @property
     def title(self):
         return self._title
