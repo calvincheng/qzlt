@@ -24,7 +24,7 @@ def delete(set_title, idx):
     """Deletes card `idx` from a set"""
     s = sets.load(set_title)
     if s is None:
-        typer.secho(f"Could not find deck titled `{set_title}`", fg="red")
+        typer.secho(f"Could not find set `{set_title}`", fg="red")
         return
 
     if idx < len(s):

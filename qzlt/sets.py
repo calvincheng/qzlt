@@ -18,6 +18,23 @@ def create():
     typer.secho("Set successfully created", fg="green")
 
 
+def delete(set_title):
+    """
+    Deletes a set from disk
+
+    :param set_title: Title of set to be deleted
+    """
+    SET_PATH = f"{BASE_PATH}/{set_title}"
+    if os.path.exists(SET_PATH):
+        filenames = os.listdir(SET_PATH)
+        for filename in filenames:
+            os.remove(f"{SET_PATH}/{filename}")
+        os.rmdir(SET_PATH)
+        typer.echo(f"Deleted set `{set_title}`")
+    else:
+        typer.secho(f"Could not find set `{set_title}`", fg="red")
+
+
 def save(s):
     """Save a set to disk"""
     SET_PATH = f"{BASE_PATH}/{s.title}"
@@ -25,7 +42,7 @@ def save(s):
         os.makedirs(SET_PATH)
     with open(f"{SET_PATH}/info.json", "w") as info_file:
         info = {"title": s.title, "description": s.description}
-        info = json.dump(info, info_file)
+        info = json.dump(info, info_file, indent=4)
     with open(f"{SET_PATH}/terms.txt", "w") as terms_file:
         for card in s:
             terms_file.writelines(f"{card.term}\n")
@@ -72,7 +89,7 @@ def list():
 
     typer.echo(f"{'TITLE': <{title_width}}{'DESCRIPTION': <{description_width}}")
 
-    for title in os.listdir(f"{BASE_PATH}"):
+    for title in os.listdir(BASE_PATH):
         with open(f"{BASE_PATH}/{title}/info.json", "r") as info_file:
             info = json.load(info_file)
             title, description = info["title"], info["description"]

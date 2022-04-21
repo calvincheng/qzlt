@@ -52,6 +52,11 @@ def sets_create():
     sets.create()
 
 
+@sets_app.command("delete")
+def sets_delete(set_title: str):
+    sets.delete(set_title)
+
+
 @set_app.command("add")
 def set_add(set_title: str):
     cards.add(set_title)
