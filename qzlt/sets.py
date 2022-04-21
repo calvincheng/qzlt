@@ -3,8 +3,10 @@ import json
 import typer
 from qzlt.cards import Card
 
-""" Where all quiz files are stored """
-BASE_PATH = "sets"
+# Home directory
+HOME = os.path.expanduser("~")
+# Where all quiz files are stored
+BASE_PATH = os.path.abspath(f"{HOME}/.qzlt")
 
 
 def create():
