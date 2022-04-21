@@ -11,8 +11,8 @@ BASE_PATH = os.path.abspath(f"{HOME}/.qzlt")
 
 def create():
     """Prompts user to create a new set"""
-    title = typer.prompt(typer.style("Title", fg="bright_black"))
-    description = typer.prompt(typer.style("Description", fg="bright_black"))
+    title = typer.prompt(typer.style("Title", fg="bright_black")).strip()
+    description = typer.prompt(typer.style("Description", fg="bright_black")).strip()
     new_set = Set(title, description)
     save(new_set)
     typer.secho("Set successfully created", fg="green")

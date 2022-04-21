@@ -11,8 +11,8 @@ def add(set_title):
 
     while True:
         typer.secho("Adding new card (press ctrl+c to exit)", fg="magenta")
-        term = typer.prompt(typer.style("Term", fg="bright_black"))
-        definition = typer.prompt(typer.style("Definition", fg="bright_black"))
+        term = typer.prompt(typer.style("Term", fg="bright_black")).strip()
+        definition = typer.prompt(typer.style("Definition", fg="bright_black")).strip()
         new_card = Card(term, definition)
         s.add(new_card)
         sets.save(s)
