@@ -72,7 +72,7 @@ class Session:
                     f"The correct answer was '{card.definition}'", fg="bright_black"
                 )
             typer.echo()
-            self.output_results()
+        self.output_results()
 
     def output_results(self):
         """Prints study results to stdout"""
