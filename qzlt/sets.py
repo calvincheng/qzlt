@@ -30,33 +30,38 @@ def save(s):
             terms_file.writelines(f"{card.definition}\n")
 
 
-def load(title):
-    """Loads an exisiting set from disk"""
-    if not os.path.exists(f"{BASE_PATH}/{title}"):
+def load(set_title):
+    """
+    Loads an exisiting set from disk
+
+    :param set_title: Title of the set to be loaded
+    :returns: instance of Set or None if it doesn't exist
+    """
+    if not os.path.exists(f"{BASE_PATH}/{set_title}"):
         return None
 
-    set_title, set_description = None, None
-    cards = []
+    loaded_title, loaded_description = None, None
+    loaded_cards = []
 
     # Populate title and description
-    with open(f"{BASE_PATH}/{title}/info.json", "r") as info_file:
+    with open(f"{BASE_PATH}/{set_title}/info.json", "r") as info_file:
         info = json.load(info_file)
-        set_title = info["title"]
-        set_description = info["description"]
+        loaded_title = info["title"]
+        loaded_description = info["description"]
 
     # Populate cards
-    with open(f"{BASE_PATH}/{title}/terms.txt", "r") as file:
+    with open(f"{BASE_PATH}/{set_title}/terms.txt", "r") as file:
         lines = file.read().splitlines()
         for i in range(len(lines) // 2):
             term, definition = lines[2 * i], lines[2 * i + 1]
             card = Card(term, definition)
-            cards.append(card)
+            loaded_cards.append(card)
 
-    return Set(set_title, set_description, cards)
+    return Set(loaded_title, loaded_description, loaded_cards)
 
 
 def list():
-    """Lists all cards saved in disk"""
+    """Prints all sets to stdout"""
     size = os.get_terminal_size()
     terminal_width = min(size.columns, 120)
 
@@ -75,16 +80,30 @@ def list():
 
 
 class Set:
+    """
+    Contains cards to be studied.
+    Each set is labelled by a name and an optional description.
+    """
+
     def __init__(self, title, description, cards=[]):
+        """
+        Constructs a new Set
+
+        :param title: Title of the set
+        :param description: Description of the set
+        :param cards: Cards in the set (empty by default)
+        """
         self._title = title
         self._description = description
         self._cards = cards
 
     def __len__(self):
-        return len(self._cards)
+        """
+        Implements built-in `len()` function
 
-    def __getitem__(self, n):
-        return self._cards[n]
+        :returns: Number of cards in the set
+        """
+        return len(self._cards)
 
     @property
     def title(self):
@@ -111,12 +130,30 @@ class Set:
         self._cards = new_cards
 
     def add(self, card):
+        """
+        Adds a card from set
+
+        :param card: Instance of Card to be added
+        """
         self._cards.append(card)
 
     def delete(self, idx):
+        """
+        Deletes a card from set
+
+        :param idx: Index of card to be be deleted
+        """
         self._cards.pop(idx)
 
     def list(self):
+        """
+        Prints a formatted table of cards within the set to stdout
+
+        Card information includes
+          - Index (0-based)
+          - Term
+          - Definition
+        """
         idx_width = 6
         term_width = 32
         definition_width = 32

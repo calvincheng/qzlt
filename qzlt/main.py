@@ -14,6 +14,13 @@ app.add_typer(set_app, name="set")
 
 @app.command()
 def study(set_title: str, study_mode: str = "write", shuffle: bool = False):
+    """
+    Begin a study session
+
+    :param set_title: Title of set
+    :param study_mode: Study mode (default: "write")
+    :param shuffle: Shuffles cards in set if True (default: False)
+    """
     deck = sets.load(set_title)
     if deck is None:
         typer.secho(f"Could not find deck titled `{set_title}`", fg="red")
@@ -28,9 +35,11 @@ def study(set_title: str, study_mode: str = "write", shuffle: bool = False):
 
 @sets_app.callback(invoke_without_command=True)
 def sets_default(ctx: typer.Context):
-    if ctx.invoked_subcommand is not None:
-        return
-    sets.list()
+    """
+    List all sets as the default action for `sets` command
+    """
+    if ctx.invoked_subcommand is None:
+        sets.list()
 
 
 @sets_app.command("list")

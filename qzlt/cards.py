@@ -5,6 +5,10 @@ from qzlt import sets
 def add(set_title):
     """Prompts user to add cards to set"""
     s = sets.load(set_title)
+    if s is None:
+        typer.secho(f"Could not find deck titled `{set_title}`", fg="red")
+        return
+
     while True:
         typer.secho("Adding new card (press ctrl+c to exit)", fg="magenta")
         term = typer.prompt(typer.style("Term", fg="bright_black"))
@@ -19,6 +23,10 @@ def add(set_title):
 def delete(set_title, idx):
     """Deletes card `idx` from a set"""
     s = sets.load(set_title)
+    if s is None:
+        typer.secho(f"Could not find deck titled `{set_title}`", fg="red")
+        return
+
     if idx < len(s):
         s.delete(idx)
         sets.save(s)
@@ -33,7 +41,17 @@ def delete(set_title, idx):
 
 
 class Card:
+    """
+    Contains a term and definition.
+    """
+
     def __init__(self, term, definition):
+        """
+        Constructs a new Card
+
+        :param term: The term to learn (e.g. mitochondria)
+        :param definition: The term's definition (e.g. powerhouse of the cell)
+        """
         self._term = term
         self._definition = definition
 
