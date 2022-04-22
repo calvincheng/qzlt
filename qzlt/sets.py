@@ -177,18 +177,20 @@ class Set:
           - Term
           - Definition
         """
+        style_width = 9  # Number of additional characters used for typer.style
         idx_width = 6
         term_width = 32
         definition_width = 32
 
-        title_idx_str = f"{'ID': <{idx_width}}"
+        title_idx_str = f"{'': <{idx_width}}"
         title_term_str = f"{'TERM': <{term_width}}"
         title_definition_str = f"{'DEFINITION': <{definition_width}}"
         typer.echo(f"{title_idx_str}{title_term_str}{title_definition_str}")
 
         for i, card in enumerate(self._cards):
             term, definition = card.term, card.definition
-            idx_str = f"{i: <{idx_width}}"
+            idx = f"[{typer.style(i, fg='blue')}]"
+            idx_str = f"{idx: <{idx_width + style_width}}"
             term_str = f"{term: <{term_width}}"
             definition_str = f"{definition: <{definition_width}}"
             typer.echo(f"{idx_str}{term_str}{definition_str}")
