@@ -43,6 +43,12 @@ class Session:
                 typer.secho(
                     f"The correct answer was '{card.definition}'", fg="bright_black"
                 )
+                while answer != card.definition:
+                    answer = typer.prompt(
+                        typer.style("Retype correction", fg="bright_black"),
+                        default="",
+                        show_default=False,
+                    ).strip()
             typer.echo()
 
         self.output_results()
