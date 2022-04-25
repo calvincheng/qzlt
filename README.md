@@ -4,20 +4,9 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/calvincheng/qzlt">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-<h3 align="center">qzlt</h3>
-
+  <h3 align="center">qzlt</h3>
   <p align="center">
     A Quizlet clone for the command line.
-    <br />
-    <a href="https://github.com/calvincheng/qzlt">View Demo</a>
-    ·
-    <a href="https://github.com/calvincheng/qzlt/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/calvincheng/qzlt/issues">Request Feature</a>
   </p>
 </div>
 
@@ -29,7 +18,9 @@
   <img src="docs/screenshot.gif" alt="Screenshot" width="640" />
 </div>
 
-Lorem ipsum
+As someone who use [Quizlet](https://quizlet.com) to learn and revise new
+vocabulary, I wanted to build a CLI tool that could imitate some of its features whilst
+prioritising quick creation and revision of study sets.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -39,34 +30,27 @@ Lorem ipsum
 
 * [Python](https://www.python.org/)
 * [Typer](https://typer.tiangolo.com/)
+* [Poetry](https://python-poetry.org/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
-## Getting Started
+## Installation
 
-### Prerequisites
-
-#### python
-```
-brew install python@3.6
-```
-
-### Installation
-
-#### GitHub
+#### PyPI
 ```
 pip install qzlt
 ```
 
-#### pip
+#### From source
+With [Poetry](https://python-poetry.org) installed, run
 ```
-pip install qzlt
+git clone https://github.com/calvincheng/qzlt.git
+cd qzlt
+poetry shell
+poetry install
 ```
-
-Note that this will also create a hidden directory at `~/.qzlt`, where all study
-sets will be held.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -74,10 +58,7 @@ sets will be held.
 
 ## Usage
 
-### Commands
-
-
-### Creating and studying sets
+### Quick start
 
 Let's create a new set to start learning some common Chinese expressions. Run
 ```
@@ -87,7 +68,7 @@ Description: Common expressions in Chinese
 ```
 and follow the prompts to give your set a title and a description.
 
-You can that the newly created set exists by listing all sets via
+You can see that the newly created set exists by listing all sets via
 ```
 > quiz sets list
 TITLE               DESCRIPTION
@@ -99,15 +80,14 @@ By default, new sets are empty when created. Let's change that by adding some ca
 > quiz set add chinese
 ```
 
-You'll be prompted to start giving your card a __term__ and a __definition__:
+You'll be prompted to start giving your card a term and a definition.
 ```
 Term: 你好
 Definition: Hello
 Card added
 ```
 
-Add as many cards as you want. When you're done, you can press `ctrl` and `C` to
-exit.
+Add as many cards as you want. When you're done, press `ctrl-C` to exit.
 
 To see all the cards you've just added, run
 ```
@@ -126,7 +106,7 @@ You're all set! To study your new set, run
 > quiz study chinese
 ```
 
-To see all the study modes available, feel free to run
+To see all the study modes available, run
 ```
 > quiz study --help
 ```
@@ -134,13 +114,20 @@ To see all the study modes available, feel free to run
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+### Commands
+
+
 
 ## Roadmap
 
 - [ ] Import from Anki
 - [ ] Collect and display statistics (review heatmap, streaks, etc.)
+- [ ] Add config file to customise experience (e.g. shuffle by default)
+- [ ] Smarter corrections (e.g. grammatical gender: professeur•e)
+- [ ] Markdown support for cards
+- [ ] Incorporate TTS
+- [ ] Resume interrupted sessions
 
-See the [open issues](https://github.com/calvincheng/qzlt/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -148,7 +135,7 @@ See the [open issues](https://github.com/calvincheng/qzlt/issues) for a full lis
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

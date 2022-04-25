@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "qzlt"
 version = "0.1.0"
-description = "A flashcard CLI application"
+description = "A Quizlet clone for the command line"
 authors = ["Calvin Cheng <calvin.cc.cheng@gmail.com>"]
+readme = "README.md"
 
 [tool.poetry.scripts]
 quiz = "qzlt.main:app"
