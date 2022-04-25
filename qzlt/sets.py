@@ -40,6 +40,7 @@ def save(s):
     """Save a set to disk"""
     SET_PATH = f"{BASE_PATH}/{s.title}"
     if not os.path.exists(SET_PATH):
+        typer.secho(f"Directory {SET_PATH} not found. Creating it now...")
         os.makedirs(SET_PATH)
     with open(f"{SET_PATH}/info.json", "w") as info_file:
         info = {"title": s.title, "description": s.description}
