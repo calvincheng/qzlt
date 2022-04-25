@@ -2,6 +2,7 @@ import os
 import json
 import typer
 from qzlt.cards import Card
+from copy import deepcopy
 
 # Home directory
 HOME = os.path.expanduser("~")
@@ -18,7 +19,7 @@ def create():
     typer.secho("Set successfully created", fg="green")
 
 
-def delete(set_title):
+def remove(set_title):
     """
     Deletes a set from disk
 
@@ -98,6 +99,44 @@ def list():
             typer.echo(f"{title_str}{description_str}")
 
 
+def add(set_title):
+    """Prompts user to add cards to set"""
+    s = load(set_title)
+    if s is None:
+        typer.secho(f"Could not find deck titled `{set_title}`", fg="red")
+        return
+
+    while True:
+        typer.secho("Adding new card (press ctrl+c to exit)", fg="magenta")
+        term = typer.prompt(typer.style("Term", fg="bright_black")).strip()
+        definition = typer.prompt(typer.style("Definition", fg="bright_black")).strip()
+        new_card = Card(term, definition)
+        s.add(new_card)
+        save(s)
+        typer.secho("Card added", fg="green")
+        typer.echo()
+
+
+def delete(set_title, idx):
+    """Deletes card `idx` from a set"""
+    s = load(set_title)
+    if s is None:
+        typer.secho(f"Could not find set `{set_title}`", fg="red")
+        return
+
+    if idx < len(s):
+        s.delete(idx)
+        save(s)
+        typer.echo(f"Deleted card {idx}")
+    else:
+        reason = None
+        if idx < 0:
+            reason = "cannot be less than 0"
+        elif idx >= len(s):
+            reason = "greater than set size"
+        typer.secho(f"Invalid index: {idx} ({reason})", fg="red", err=True)
+
+
 class Set:
     """
     Contains cards to be studied.
@@ -114,7 +153,7 @@ class Set:
         """
         self._title = title
         self._description = description
-        self._cards = cards
+        self._cards = deepcopy(cards)
 
     def __len__(self):
         """

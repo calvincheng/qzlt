@@ -1,6 +1,5 @@
 import typer
 from qzlt import sets
-from qzlt import cards
 from qzlt.sessions import Session
 
 app = typer.Typer()
@@ -61,7 +60,7 @@ def sets_delete(set_title: str):
     """
     Delete a set
     """
-    sets.delete(set_title)
+    sets.remove(set_title)
 
 
 @set_app.command("add")
@@ -69,7 +68,7 @@ def set_add(set_title: str):
     """
     Add cards to a set
     """
-    cards.add(set_title)
+    sets.add(set_title)
 
 
 @set_app.command("delete")
@@ -77,7 +76,7 @@ def set_delete(set_title: str, card_id: int):
     """
     Delete a card from a set
     """
-    cards.delete(set_title, card_id)
+    sets.delete(set_title, card_id)
 
 
 @set_app.command("list")
