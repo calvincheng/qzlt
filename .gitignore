@@ -5,3 +5,5 @@ pyvenv.cfg
 *.swp
 sets/
 __pycache__/
+.DS_Store
+dist/
