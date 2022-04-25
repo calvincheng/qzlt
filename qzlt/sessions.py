@@ -42,7 +42,14 @@ class Session:
                     f"The correct answer was '{card.definition}'", fg="bright_black"
                 )
             typer.echo()
+
         self.output_results()
+
+        if len(self.incorrect) > 0 and typer.confirm("Review incorrect cards?"):
+            self._deck.cards = [*self.incorrect]
+            self.correct = set()
+            self.incorrect = set()
+            self.write()
 
     def learn(self):
         """Begins a learning session"""
@@ -74,7 +81,14 @@ class Session:
                     f"The correct answer was '{card.definition}'", fg="bright_black"
                 )
             typer.echo()
+
         self.output_results()
+
+        if len(self.incorrect) > 0 and typer.confirm("Review incorrect cards?"):
+            self._deck.cards = [*self.incorrect]
+            self.correct = set()
+            self.incorrect = set()
+            self.learn()
 
     def output_results(self):
         """Prints study results to stdout"""
