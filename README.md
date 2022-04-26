@@ -6,7 +6,7 @@
 <div align="center">
   <h3 align="center">qzlt</h3>
   <p align="center">
-    A Quizlet clone for the command line.
+    A <a href="https://quizlet.com">Quizlet</a> clone for the command line.
   </p>
   <img src="docs/screenshot.gif" alt="Screenshot" width="580" />
 </div>
@@ -132,7 +132,7 @@ Commands:
 - [ ] Import from Anki
 - [ ] Collect and display statistics (review heatmap, streaks, etc.)
 - [ ] Add config file to customise experience (e.g. shuffle by default)
-- [ ] Smarter corrections (e.g. grammatical gender: professeur•e)
+- [ ] Smarter corrections (e.g. allow answers from either grammatical gender: professeur•e)
 - [ ] Markdown support for cards
 - [ ] Incorporate TTS
 - [ ] Resume interrupted sessions
