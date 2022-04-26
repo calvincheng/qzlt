@@ -4,7 +4,7 @@
 
 <br />
 <div align="center">
-  <h2 align="center">qzlt</h2>
+  <h3 align="center">qzlt</h3>
   <p align="center">
     A Quizlet clone for the command line.
   </p>
@@ -87,7 +87,7 @@ To see all the cards you've just added, run
 quiz set list chinese
 ```
 ```
-      TERM          DEFINITION
+      TERM         DEFINITION
 [0]   你好          Hello
 [1]   再見          Goodbye
 [2]   開心          Happy
