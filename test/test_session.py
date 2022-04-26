@@ -1,38 +1,29 @@
 import unittest
 from unittest.mock import patch
+from copy import deepcopy
 
 from qzlt.cards import Card
 from qzlt.sets import Set
 from qzlt.sessions import Session
 
+test_set = Set(
+    "French",
+    "Common French expressions",
+    [
+        Card("Bonjour", "Hello"),
+        Card("Je m'appelle Sam", "My name is Sam"),
+        Card("Au revoir", "Bye"),
+    ],
+)
 
 class TestSession(unittest.TestCase):
     def test_init_session(self):
-        test_set = Set(
-            "French",
-            "Common French expressions",
-            [
-                Card("Bonjour", "Hello"),
-                Card("Je m'appelle Sam", "My name is Sam"),
-                Card("Au revoir", "Bye"),
-            ],
-        )
-        self.test_session = Session(test_set)
-
+        self.test_session = Session(deepcopy(test_set))
         self.assertIsNotNone(self.test_session)
 
     @patch("random.shuffle")
     def test_init_shuffle_session(self, mock_shuffle):
-        test_set = Set(
-            "French",
-            "Common French expressions",
-            [
-                Card("Bonjour", "Hello"),
-                Card("Je m'appelle Sam", "My name is Sam"),
-                Card("Au revoir", "Bye"),
-            ],
-        )
-        self.test_session = Session(test_set, shuffle=True)
+        self.test_session = Session(deepcopy(test_set), shuffle=True)
         self.assertEqual(mock_shuffle.call_count, 1)
 
 
