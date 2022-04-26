@@ -30,10 +30,16 @@ class Session:
         """Begins a writing session"""
         for i, card in enumerate(self._deck):
             typer.secho(f"Card {i+1}/{len(self._deck)}", fg="magenta")
+
+            # Output term
             typer.secho(card.term, fg="bright_white", bold=True)
+
+            # Prompt for answer
             answer = typer.prompt(
                 typer.style("Answer", fg="bright_black"), default="", show_default=False
             ).strip()
+
+            # Check answer
             if answer == card.definition:
                 self.correct.add(card)
                 typer.secho("Correct!", fg="green")
@@ -43,6 +49,8 @@ class Session:
                 typer.secho(
                     f"The correct answer was '{card.definition}'", fg="bright_black"
                 )
+
+                # Prompt for correction
                 while answer != card.definition:
                     answer = typer.prompt(
                         typer.style("Retype correction", fg="bright_black"),
@@ -67,20 +75,26 @@ class Session:
 
             num_choices = 4
             all_choices = list(map(lambda x: x.definition, self._deck.cards))
+
+            # Populate choices
             choices = sample(num_choices - 1, all_choices)
             while card.definition in choices:
                 choices = sample(num_choices - 1, all_choices)
             choices.append(card.definition)
             random.shuffle(choices)
 
+            # Output choices to terminal
             for i, choice in enumerate(choices):
                 typer.echo(f"{i + 1}. {choice}")
 
+            # Prompt for answer
             index = typer.prompt(
                 typer.style("Select the correct term", bold=True),
                 default="",
                 show_default=False,
             ).strip()
+
+            # Check answer
             if choices[int(index) - 1] == card.definition:
                 self.correct.add(card)
                 typer.secho("Correct!", fg="green")
