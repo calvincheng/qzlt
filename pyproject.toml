@@ -6,6 +6,7 @@ authors = ["Calvin Cheng <calvin.cc.cheng@gmail.com>"]
 
 [tool.poetry.scripts]
 quiz = "qzlt.main:app"
+test = "scripts:run_tests"
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
