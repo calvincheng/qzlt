@@ -4,29 +4,16 @@
 
 <br />
 <div align="center">
-  <h3 align="center">qzlt</h3>
+  <h2 align="center">qzlt</h2>
   <p align="center">
     A Quizlet clone for the command line.
   </p>
+  <img src="docs/screenshot.gif" alt="Screenshot" width="580" />
 </div>
 
 
 
-## About
-
-<div align="center">
-  <img src="docs/screenshot.gif" alt="Screenshot" width="640" />
-</div>
-
-As someone who use [Quizlet](https://quizlet.com) to learn and revise new
-vocabulary, I wanted to build a CLI tool that could imitate some of its features whilst
-prioritising quick creation and revision of study sets.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-### Built With
+## Built With
 
 * [Python](https://www.python.org/)
 * [Typer](https://typer.tiangolo.com/)
@@ -39,11 +26,13 @@ prioritising quick creation and revision of study sets.
 ## Installation
 
 #### PyPI
+
 ```
 pip install qzlt
 ```
 
 #### From source
+
 With [Poetry](https://python-poetry.org) installed, run
 ```
 git clone https://github.com/calvincheng/qzlt.git
@@ -62,7 +51,9 @@ poetry install
 
 Let's create a new set to start learning some common Chinese expressions. Run
 ```
-> quiz sets create
+quiz sets create
+```
+```
 Title: chinese
 Description: Common expressions in Chinese
 ```
@@ -70,14 +61,16 @@ and follow the prompts to give your set a title and a description.
 
 You can see that the newly created set exists by listing all sets via
 ```
-> quiz sets list
+quiz sets list
+```
+```
 TITLE               DESCRIPTION
 chinese             Common expressions in Chinese
 ```
 
 By default, new sets are empty when created. Let's change that by adding some cards. Run
 ```
-> quiz set add chinese
+quiz set add chinese
 ```
 
 You'll be prompted to start giving your card a term and a definition.
@@ -91,7 +84,9 @@ Add as many cards as you want. When you're done, press `ctrl-C` to exit.
 
 To see all the cards you've just added, run
 ```
-> quiz set list chinese
+quiz set list chinese
+```
+```
       TERM          DEFINITION
 [0]   你好          Hello
 [1]   再見          Goodbye
@@ -103,18 +98,32 @@ To see all the cards you've just added, run
 
 You're all set! To study your new set, run
 ```
-> quiz study chinese
+quiz study chinese
 ```
 
 To see all the study modes available, run
 ```
-> quiz study --help
+quiz study --help
+```
+
+### Commands
+
+```
+Usage: quiz [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --install-completion  Install completion for the current shell.
+  --show-completion     Show completion for the current shell, to copy it or
+                        customize the installation.
+  --help                Show this message and exit.
+
+Commands:
+  set    Manage an individual set
+  sets   Manage all sets
+  study  Begin a study session
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-### Commands
 
 
 
