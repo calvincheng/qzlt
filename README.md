@@ -49,7 +49,7 @@ poetry install
 
 ### Quick start
 
-Let's create a new set to start learning some common Chinese expressions. Run
+Let's create a new set to start learning some common Chinese vocabulary. Run
 ```
 quiz sets create
 ```
