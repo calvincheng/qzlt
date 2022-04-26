@@ -144,7 +144,7 @@ Commands:
 
 ## License
 
-Distributed under the [MIT Licnese](https://github.com/calvincheng/qzlt/blob/master/LICENSE).
+Distributed under the [MIT License](https://github.com/calvincheng/qzlt/blob/master/LICENSE).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
