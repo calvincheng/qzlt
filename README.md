@@ -135,7 +135,7 @@ To see all the study modes available, run
 
 ## License
 
-Distributed under the MIT License.
+Distributed under the [MIT Licnese](https://github.com/calvincheng/qzlt/blob/master/LICENSE).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
