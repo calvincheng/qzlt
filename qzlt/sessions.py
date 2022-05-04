@@ -73,7 +73,7 @@ class Session:
             typer.secho(f"Card {i+1}/{len(self._deck)}", fg="magenta")
             typer.secho(card.term, fg="bright_white", bold=True)
 
-            num_choices = 4
+            num_choices = min(4, len(self._deck))
             all_choices = list(map(lambda x: x.definition, self._deck.cards))
 
             # Populate choices
